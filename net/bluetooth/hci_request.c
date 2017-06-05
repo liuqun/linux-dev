@@ -1406,6 +1406,12 @@ int hci_update_random_address(struct hci_request *req, bool require_privacy,
 	struct hci_dev *hdev = req->hdev;
 	int err;
 
+	if (require_privacy) {
+		err = wait_for_random_bytes();
+		if (unlikely(err))
+			return err;
+	}
+
 	/* If privacy is enabled use a resolvable private address. If
 	 * current RPA has expired or there is something else than
 	 * the current RPA in use, then generate a new one.
