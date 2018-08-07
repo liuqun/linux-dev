@@ -110,6 +110,9 @@ void blake2s_init_key(struct blake2s_state *state, const size_t outlen,
 }
 EXPORT_SYMBOL(blake2s_init_key);
 
+#if defined(CONFIG_ZINC_ARCH_X86_64)
+#include "blake2s-x86_64-glue.c"
+#else
 static bool *const blake2s_nobs[] __initconst = { };
 static void __init blake2s_fpu_init(void)
 {
@@ -120,6 +123,7 @@ static inline bool blake2s_compress_arch(struct blake2s_state *state,
 {
 	return false;
 }
+#endif
 
 static inline void blake2s_compress(struct blake2s_state *state,
 				    const u8 *block, size_t nblocks,
