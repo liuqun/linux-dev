@@ -13,3 +13,4 @@ generic-y += sections.h
 generic-y += trace_clock.h
 generic-y += current.h
 generic-y += kprobes.h
+generic-y += simd.h

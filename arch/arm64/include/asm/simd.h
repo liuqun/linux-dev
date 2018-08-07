@@ -1,11 +1,10 @@
-/*
- * Copyright (C) 2017 Linaro Ltd. <ard.biesheuvel@linaro.org>
+/* SPDX-License-Identifier: GPL-2.0
  *
- * This program is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License version 2 as published
- * by the Free Software Foundation.
+ * Copyright (C) 2017 Linaro Ltd. <ard.biesheuvel@linaro.org>
+ * Copyright (C) 2015-2018 Jason A. Donenfeld <Jason@zx2c4.com>. All Rights Reserved.
  */
 
+#include <linux/simd.h>
 #ifndef __ASM_SIMD_H
 #define __ASM_SIMD_H
 
@@ -16,6 +15,8 @@
 #include <linux/types.h>
 
 #ifdef CONFIG_KERNEL_MODE_NEON
+#include <asm/neon.h>
+#include <asm/simd.h>
 
 DECLARE_PER_CPU(bool, kernel_neon_busy);
 
@@ -40,9 +41,47 @@ static __must_check inline bool may_use_simd(void)
 		!this_cpu_read(kernel_neon_busy);
 }
 
+static inline void simd_get(simd_context_t *ctx)
+{
+	*ctx = may_use_simd() ? HAVE_FULL_SIMD : HAVE_NO_SIMD;
+}
+
+static inline void simd_put(simd_context_t *ctx)
+{
+	if (*ctx & HAVE_SIMD_IN_USE)
+		kernel_neon_end();
+	*ctx = HAVE_NO_SIMD;
+}
+
+static __must_check inline bool simd_use(simd_context_t *ctx)
+{
+	if (!(*ctx & HAVE_FULL_SIMD))
+		return false;
+	if (*ctx & HAVE_SIMD_IN_USE)
+		return true;
+	kernel_neon_begin();
+	*ctx |= HAVE_SIMD_IN_USE;
+	return true;
+}
+
 #else /* ! CONFIG_KERNEL_MODE_NEON */
 
-static __must_check inline bool may_use_simd(void) {
+static __must_check inline bool may_use_simd(void)
+{
+	return false;
+}
+
+static inline void simd_get(simd_context_t *ctx)
+{
+	*ctx = HAVE_NO_SIMD;
+}
+
+static inline void simd_put(simd_context_t *ctx)
+{
+}
+
+static __must_check inline bool simd_use(simd_context_t *ctx)
+{
 	return false;
 }
 
