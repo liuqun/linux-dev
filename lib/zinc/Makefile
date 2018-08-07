@@ -11,6 +11,9 @@ AFLAGS_chacha20-mips.o += -O2 # This is required to fill the branch delay slots
 perlasm-targets += chacha20/chacha20-x86_64.S chacha20/chacha20-arm.S chacha20/chacha20-arm64.S
 obj-$(CONFIG_ZINC_CHACHA20) += zinc_chacha20.o
 
+zinc_poly1305-y := poly1305/poly1305.o
+obj-$(CONFIG_ZINC_POLY1305) += zinc_poly1305.o
+
 quiet_cmd_perlasm = PERLASM $@
       cmd_perlasm = $(PERL) $< > $@
 $(addprefix $(obj)/,$(perlasm-targets)): $(obj)/%.S: $(src)/%.pl FORCE
