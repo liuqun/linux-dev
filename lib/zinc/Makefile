@@ -25,6 +25,7 @@ zinc_chacha20poly1305-y := chacha20poly1305.o
 obj-$(CONFIG_ZINC_CHACHA20POLY1305) += zinc_chacha20poly1305.o
 
 zinc_blake2s-y := blake2s/blake2s.o
+zinc_blake2s-$(CONFIG_ZINC_ARCH_X86_64) += blake2s/blake2s-x86_64.o
 obj-$(CONFIG_ZINC_BLAKE2S) += zinc_blake2s.o
 
 quiet_cmd_perlasm = PERLASM $@
