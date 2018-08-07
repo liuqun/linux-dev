@@ -16,7 +16,6 @@ generic-y += rwsem.h
 generic-y += seccomp.h
 generic-y += segment.h
 generic-y += serial.h
-generic-y += simd.h
 generic-y += sizes.h
 generic-y += timex.h
 generic-y += trace_clock.h
