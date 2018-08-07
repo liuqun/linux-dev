@@ -5,6 +5,12 @@ config ZINC_CHACHA20
 config ZINC_POLY1305
 	tristate
 
+config ZINC_CHACHA20POLY1305
+	tristate
+	select ZINC_CHACHA20
+	select ZINC_POLY1305
+	select CRYPTO_BLKCIPHER
+
 config ZINC_SELFTEST
 	bool "Zinc cryptography library self-tests"
 	default y
