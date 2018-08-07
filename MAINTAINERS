@@ -16770,6 +16770,14 @@ Q:	https://patchwork.linuxtv.org/project/linux-media/list/
 S:	Maintained
 F:	drivers/media/dvb-frontends/zd1301_demod*
 
+ZINC CRYPTOGRAPHY LIBRARY
+M:	Jason A. Donenfeld <Jason@zx2c4.com>
+M:	Samuel Neves <sneves@dei.uc.pt>
+S:	Maintained
+F:	lib/zinc/
+F:	include/zinc/
+L:	linux-crypto@vger.kernel.org
+
 ZPOOL COMPRESSED PAGE STORAGE API
 M:	Dan Streetman <ddstreet@ieee.org>
 L:	linux-mm@kvack.org

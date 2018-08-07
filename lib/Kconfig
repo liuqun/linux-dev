@@ -488,6 +488,8 @@ config GLOB_SELFTEST
 	  module load) by a small amount, so you're welcome to play with
 	  it, but you probably don't need it.
 
+source "lib/zinc/Kconfig"
+
 #
 # Netlink attribute parsing support is select'ed if needed
 #
