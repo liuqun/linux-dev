@@ -24,6 +24,9 @@ obj-$(CONFIG_ZINC_POLY1305) += zinc_poly1305.o
 zinc_chacha20poly1305-y := chacha20poly1305.o
 obj-$(CONFIG_ZINC_CHACHA20POLY1305) += zinc_chacha20poly1305.o
 
+zinc_blake2s-y := blake2s/blake2s.o
+obj-$(CONFIG_ZINC_BLAKE2S) += zinc_blake2s.o
+
 quiet_cmd_perlasm = PERLASM $@
       cmd_perlasm = $(PERL) $< > $@
 $(addprefix $(obj)/,$(perlasm-targets)): $(obj)/%.S: $(src)/%.pl FORCE
