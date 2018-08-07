@@ -20,6 +20,9 @@
 #include <linux/init.h>
 #include <crypto/algapi.h> // For crypto_memneq.
 
+#if defined(CONFIG_ZINC_ARCH_X86_64)
+#include "curve25519-x86_64-glue.c"
+#else
 static bool *const curve25519_nobs[] __initconst = { };
 static void __init curve25519_fpu_init(void)
 {
@@ -35,6 +38,7 @@ static inline bool curve25519_base_arch(u8 pub[CURVE25519_KEY_SIZE],
 {
 	return false;
 }
+#endif
 
 #if defined(CONFIG_ARCH_SUPPORTS_INT128) && defined(__SIZEOF_INT128__)
 #include "curve25519-hacl64.c"
