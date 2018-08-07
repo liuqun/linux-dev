@@ -18,6 +18,8 @@
 
 #if defined(CONFIG_ZINC_ARCH_X86_64)
 #include "chacha20-x86_64-glue.c"
+#elif defined(CONFIG_ZINC_ARCH_ARM) || defined(CONFIG_ZINC_ARCH_ARM64)
+#include "chacha20-arm-glue.c"
 #else
 static bool *const chacha20_nobs[] __initconst = { };
 static void __init chacha20_fpu_init(void)
