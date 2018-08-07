@@ -1,0 +1,42 @@
+config ZINC_SELFTEST
+	bool "Zinc cryptography library self-tests"
+	default y
+	help
+	  This builds a series of self-tests for the Zinc crypto library, which
+	  help diagnose any cryptographic algorithm implementation issues that
+	  might be at the root cause of potential bugs. It also adds various
+	  traps for incorrect usage.
+
+	  Unless you are optimizing for machines without much disk space or for
+	  very slow machines, it is probably a good idea to say Y here, so that
+	  any potential cryptographic bugs translate into easy bug reports
+	  rather than long-lasting security issues.
+
+config ZINC_DEBUG
+	bool "Zinc cryptography library debugging"
+	help
+	  This turns on a series of additional checks and debugging options
+	  that are useful for developers but probably will not provide much
+	  benefit to end users.
+
+	  Most people should say N here.
+
+config ZINC_ARCH_ARM
+	def_bool y
+	depends on ARM
+
+config ZINC_ARCH_ARM64
+	def_bool y
+	depends on ARM64
+
+config ZINC_ARCH_X86_64
+	def_bool y
+	depends on X86_64 && !UML
+
+config ZINC_ARCH_MIPS
+	def_bool y
+	depends on MIPS && CPU_MIPS32_R2 && !64BIT
+
+config ZINC_ARCH_MIPS64
+	def_bool y
+	depends on MIPS && 64BIT
