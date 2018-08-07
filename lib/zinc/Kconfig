@@ -1,3 +1,7 @@
+config ZINC_CHACHA20
+	tristate
+	select CRYPTO_ALGAPI
+
 config ZINC_SELFTEST
 	bool "Zinc cryptography library self-tests"
 	default y
