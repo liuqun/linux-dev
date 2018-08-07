@@ -6,6 +6,8 @@ zinc_chacha20-y := chacha20/chacha20.o
 zinc_chacha20-$(CONFIG_ZINC_ARCH_X86_64) += chacha20/chacha20-x86_64.o
 zinc_chacha20-$(CONFIG_ZINC_ARCH_ARM) += chacha20/chacha20-arm.o chacha20/chacha20-unrolled-arm.o
 zinc_chacha20-$(CONFIG_ZINC_ARCH_ARM64) += chacha20/chacha20-arm64.o
+zinc_chacha20-$(CONFIG_ZINC_ARCH_MIPS) += chacha20/chacha20-mips.o
+AFLAGS_chacha20-mips.o += -O2 # This is required to fill the branch delay slots
 perlasm-targets += chacha20/chacha20-x86_64.S chacha20/chacha20-arm.S chacha20/chacha20-arm64.S
 obj-$(CONFIG_ZINC_CHACHA20) += zinc_chacha20.o
 
