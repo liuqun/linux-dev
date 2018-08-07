@@ -29,6 +29,7 @@ zinc_blake2s-$(CONFIG_ZINC_ARCH_X86_64) += blake2s/blake2s-x86_64.o
 obj-$(CONFIG_ZINC_BLAKE2S) += zinc_blake2s.o
 
 zinc_curve25519-y := curve25519/curve25519.o
+zinc_curve25519-$(CONFIG_ZINC_ARCH_ARM) += curve25519/curve25519-arm.o
 obj-$(CONFIG_ZINC_CURVE25519) += zinc_curve25519.o
 
 quiet_cmd_perlasm = PERLASM $@
