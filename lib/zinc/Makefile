@@ -21,6 +21,9 @@ zinc_poly1305-$(CONFIG_ZINC_ARCH_MIPS64) += poly1305/poly1305-mips64.o
 perlasm-targets += poly1305/poly1305-x86_64.S poly1305/poly1305-arm.S poly1305/poly1305-arm64.S poly1305/poly1305-mips64.S
 obj-$(CONFIG_ZINC_POLY1305) += zinc_poly1305.o
 
+zinc_chacha20poly1305-y := chacha20poly1305.o
+obj-$(CONFIG_ZINC_CHACHA20POLY1305) += zinc_chacha20poly1305.o
+
 quiet_cmd_perlasm = PERLASM $@
       cmd_perlasm = $(PERL) $< > $@
 $(addprefix $(obj)/,$(perlasm-targets)): $(obj)/%.S: $(src)/%.pl FORCE
