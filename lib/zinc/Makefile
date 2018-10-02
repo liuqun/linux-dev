@@ -12,6 +12,8 @@ perlasm-targets += chacha20/chacha20-x86_64.S chacha20/chacha20-arm.S chacha20/c
 obj-$(CONFIG_ZINC_CHACHA20) += zinc_chacha20.o
 
 zinc_poly1305-y := poly1305/poly1305.o
+zinc_poly1305-$(CONFIG_ZINC_ARCH_X86_64) += poly1305/poly1305-x86_64.o
+perlasm-targets += poly1305/poly1305-x86_64.S
 obj-$(CONFIG_ZINC_POLY1305) += zinc_poly1305.o
 
 quiet_cmd_perlasm = PERLASM $@
