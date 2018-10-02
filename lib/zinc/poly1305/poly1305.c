@@ -16,6 +16,9 @@
 #include <linux/module.h>
 #include <linux/init.h>
 
+#if defined(CONFIG_ZINC_ARCH_X86_64)
+#include "poly1305-x86_64-glue.c"
+#else
 static inline bool poly1305_init_arch(void *ctx,
 				      const u8 key[POLY1305_KEY_SIZE])
 {
@@ -37,6 +40,7 @@ static bool *const poly1305_nobs[] __initconst = { };
 static void __init poly1305_fpu_init(void)
 {
 }
+#endif
 
 #if defined(CONFIG_ARCH_SUPPORTS_INT128) && defined(__SIZEOF_INT128__)
 #include "poly1305-donna64.c"
